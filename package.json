@@ -1,0 +1,11 @@
+{
+  "name": "pv-forecaster",
+  "version": "1.0.0",
+  "description": "Photovoltaic energy forecaster",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Axel Martin",
+  "license": "ISC"
+}
