@@ -1,0 +1,8 @@
+#Ignore environment variables from git repo
+.env
+
+#Ignore node modules from git repo
+/node_modules
+
+#Ignore compiled files
+/dist
