@@ -1,0 +1,16 @@
+.card {
+    margin-top: 40px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    background-color: white;
+    height: 200px;
+    width: 800px;
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.1);
+    justify-self: center;
+    text-align: center;
+    padding: 10px 18px 20px 24px;
+    font-family: Camphor, Open Sans, Segoe UI, sans-serif;
+    color: #11998e;
+}

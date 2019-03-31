@@ -71,7 +71,14 @@ const browserConfig = {
   devServer: {
     contentBase: path.join(__dirname, "dist/public"),
     compress: true,
-    port: 3000
+    port: 3000,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080",
+        secure: false,
+        changeOrigin: true
+      }
+    }
   },
   plugins: [
     new MiniCssExtractPlugin({
