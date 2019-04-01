@@ -20,7 +20,6 @@ const App = () => {
     try {
       const url = `/api/pgis-data?lat=${lat}&lng=${lng}&pannelArea=${pannelArea}`
       const results = await dataFetcher(url)
-      console.log(results)
       setTotalEnergyYearly(results.data.totalYearlyEnergy)
     } catch (error) {
       setErrorFromApi(error)

@@ -65,9 +65,7 @@ const Form = props => {
         <div>
           <label htmlFor="latitude">The latitude of your house</label>
           <input
-            className={
-              !incorrectPannelAreaInput ? "latitude" : "latitude error"
-            }
+            className={!incorrectLatitudeInput ? "latitude" : "latitude error"}
             data-testid="latitude-input"
             type="text"
             name="latitude"
@@ -83,7 +81,7 @@ const Form = props => {
           <label htmlFor="longitude">The longitude of your house</label>
           <input
             className={
-              !incorrectPannelAreaInput ? "longitude" : "longitude error"
+              !incorrectLongitudeInput ? "longitude" : "longitude error"
             }
             data-testid="longitude-input"
             type="text"
