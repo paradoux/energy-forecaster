@@ -71,3 +71,39 @@ describe("Form component success handling", () => {
     inputSuccessHandlingTest("pannel-area-input", 30)
   })
 })
+
+describe("Submit handler success handling", () => {
+  test("It should display the correct result when success", async () => {
+    // Create a mock submit handler
+    const mockClickHanlder = jest.fn()
+    // Pass this function has a Form prop
+    const form = render(<Form fetchEnergyEstimation={mockClickHanlder} />)
+    const latitudeInput = form.getByTestId("latitude-input")
+    const longitudeInput = form.getByTestId("longitude-input")
+    const pannelAreaInput = form.getByTestId("pannel-area-input")
+    const submitInput = form.getByTestId("submit-input")
+
+    fireEvent.change(latitudeInput, {target: {value: 49.249}})
+    fireEvent.change(longitudeInput, {target: {value: 5.951}})
+    fireEvent.change(pannelAreaInput, {target: {value: 30}})
+    fireEvent.click(submitInput)
+
+    // Test click handler
+    expect(mockClickHanlder).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe("Submit handler error handling", () => {
+  test("It should display the correct result when success", async () => {
+    // Create a mock submit handler
+    const mockClickHanlder = jest.fn()
+    // Pass this function has a Form prop
+    const form = render(<Form fetchEnergyEstimation={mockClickHanlder} />)
+    const submitInput = form.getByTestId("submit-input")
+
+    fireEvent.click(submitInput)
+
+    // Test click handler
+    expect(mockClickHanlder).toHaveBeenCalledTimes(0)
+  })
+})
