@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Form energyComputer={fetchEnergyEstimation} />
+      <Form fetchEnergyEstimation={fetchEnergyEstimation} />
       {totalEnergyYearly && (
         <ResultDisplayer
           data-testid="result-displayer"

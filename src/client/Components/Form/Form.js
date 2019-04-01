@@ -19,7 +19,7 @@ const Form = props => {
       !incorrectLatitudeInput &&
       !incorrectLongitudeInput
     ) {
-      props.energyComputer(latitude, longitude, parseInt(pannelArea, 10))
+      props.fetchEnergyEstimation(latitude, longitude, parseInt(pannelArea, 10))
     }
   }
 
