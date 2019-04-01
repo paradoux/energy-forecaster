@@ -1,10 +1,14 @@
+// Modules imports
 import React from "react"
+import "babel-polyfill"
 import {render, fireEvent, cleanup} from "react-testing-library"
+
+// App imports
 import Form from "../Components/Form/Form"
 
 afterEach(cleanup)
-
-const form = render(<Form />)
+const mockApiCall = jest.fn(() => Promise.resolve({totalYearlyEnergy: 3295.8}))
+const form = render(<Form energyComputer={mockApiCall} />)
 const latitudeInput = form.getByTestId("latitude-input")
 const longitudeInput = form.getByTestId("longitude-input")
 const pannelAreaInput = form.getByTestId("pannel-area-input")
@@ -18,7 +22,7 @@ describe("Form component", () => {
       expect(submitInput.value).toBe("Please, fill all fields correctly")
     })
     test("It should display an error status when incorrect value", () => {
-      fireEvent.change(latitudeInput, {target: {value: ""}})
+      fireEvent.change(latitudeInput, {target: {value: "Not a latitude"}})
       expect(submitInput.value).toBe("Please, fill all fields correctly")
     })
   })
@@ -30,7 +34,7 @@ describe("Form component", () => {
       expect(submitInput.value).toBe("Please, fill all fields correctly")
     })
     test("It should display an error status when incorrect value", () => {
-      fireEvent.change(longitudeInput, {target: {value: ""}})
+      fireEvent.change(longitudeInput, {target: {value: "Not a longitude"}})
       expect(submitInput.value).toBe("Please, fill all fields correctly")
     })
   })
