@@ -4,13 +4,14 @@ import React, {useState, useEffect} from "react"
 // Style import
 import "./Form.scss"
 
+// Component
 const Form = props => {
   const [pannelArea, setPannelArea] = useState("")
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
-  const [incorrectPannelAreaInput, setIncorrectPannelAreaInput] = useState(true)
-  const [incorrectLatitudeInput, setIncorrectLatitudeInput] = useState(true)
-  const [incorrectLongitudeInput, setIncorrectLongitudeInput] = useState(true)
+  const incorrectPannelAreaInput = useValidateInput(pannelArea, "pannelArea")
+  const incorrectLatitudeInput = useValidateInput(latitude, "latitude")
+  const incorrectLongitudeInput = useValidateInput(longitude, "longitude")
 
   const handleClick = e => {
     e.preventDefault()
@@ -21,24 +22,6 @@ const Form = props => {
     ) {
       props.fetchEnergyEstimation(latitude, longitude, parseInt(pannelArea, 10))
     }
-  }
-
-  const validatePannelAreaInput = () => {
-    pannelArea === "" || /\D/.test(pannelArea)
-      ? setIncorrectPannelAreaInput(true)
-      : setIncorrectPannelAreaInput(false)
-  }
-
-  const validateLatitudeInput = () => {
-    !latitude || !/^([-+]?)([\d]{1,2})(((\.)(\d+)))$/.test(latitude)
-      ? setIncorrectLatitudeInput(true)
-      : setIncorrectLatitudeInput(false)
-  }
-
-  const validateLongitudeInput = () => {
-    !longitude || !/^(([-+]?)([\d]{1,3})((\.)(\d+))?)$/.test(longitude)
-      ? setIncorrectLongitudeInput(true)
-      : setIncorrectLongitudeInput(false)
   }
 
   const displayTextSubmitButton = () => {
@@ -52,12 +35,6 @@ const Form = props => {
       return "Submit !"
     }
   }
-
-  useEffect(() => {
-    validatePannelAreaInput()
-    validateLatitudeInput()
-    validateLongitudeInput()
-  })
 
   return (
     <>
@@ -124,6 +101,40 @@ const Form = props => {
       </form>
     </>
   )
+}
+
+// Custom hooks
+const useValidateInput = (inputAreaValue, inputAreaName) => {
+  const [incorrectInput, setIncorrectInput] = useState(true)
+
+  let regexp
+  var contentValidation
+
+  switch (inputAreaName) {
+    case "pannelArea":
+      regexp = /\D/
+      contentValidation = regexp.test(inputAreaValue)
+      break
+    case "latitude":
+      regexp = /^([-+]?)([\d]{1,2})(((\.)(\d+)))$/
+      contentValidation = !regexp.test(inputAreaValue)
+      break
+    case "longitude":
+      regexp = /^(([-+]?)([\d]{1,3})((\.)(\d+))?)$/
+      contentValidation = !regexp.test(inputAreaValue)
+      break
+    default:
+      regexp = null
+      contentValidation = null
+  }
+
+  useEffect(() => {
+    !inputAreaValue || contentValidation
+      ? setIncorrectInput(true)
+      : setIncorrectInput(false)
+  })
+
+  return incorrectInput
 }
 
 export default Form

@@ -30,10 +30,7 @@ const App = () => {
     <div className="App">
       <Form fetchEnergyEstimation={fetchEnergyEstimation} />
       {totalEnergyYearly && (
-        <ResultDisplayer
-          data-testid="result-displayer"
-          totalEnergyYearly={totalEnergyYearly}
-        />
+        <ResultDisplayer totalEnergyYearly={totalEnergyYearly} />
       )}
       {errorFromApi && <ErrorDisplayer errorFromApi={errorFromApi} />}
     </div>

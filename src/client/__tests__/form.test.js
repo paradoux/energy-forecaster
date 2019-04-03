@@ -1,7 +1,7 @@
 // Modules imports
 import React from "react"
 import "babel-polyfill"
-import {render, fireEvent, cleanup, waitForElement} from "react-testing-library"
+import {render, fireEvent, cleanup} from "react-testing-library"
 
 // App imports
 import Form from "../Components/Form/Form"
@@ -40,7 +40,7 @@ const inputSuccessHandlingTest = (inputAreaTestId, inputValue) => {
   })
 }
 
-describe("Form component Error handling", () => {
+describe("Form inputs Error handling", () => {
   // Test Latitude input error handling
   describe("Latitude input", () => {
     inputErrorHandlingTest("latitude-input")
@@ -57,7 +57,7 @@ describe("Form component Error handling", () => {
   })
 })
 
-describe("Form component success handling", () => {
+describe("Form inputs success handling", () => {
   // Test Latitude input Success
   describe("Latitude input", () => {
     inputSuccessHandlingTest("latitude-input", 49.249)
@@ -73,7 +73,7 @@ describe("Form component success handling", () => {
 })
 
 describe("Submit handler success handling", () => {
-  test("It should display the correct result when success", async () => {
+  test("It should call the submit hanlder once when correct inputs", async () => {
     // Create a mock submit handler
     const mockClickHanlder = jest.fn()
     // Pass this function has a Form prop
@@ -88,13 +88,15 @@ describe("Submit handler success handling", () => {
     fireEvent.change(pannelAreaInput, {target: {value: 30}})
     fireEvent.click(submitInput)
 
+    // Test Submit button status
+    expect(submitInput.value).toBe("Submit !")
     // Test click handler
     expect(mockClickHanlder).toHaveBeenCalledTimes(1)
   })
 })
 
 describe("Submit handler error handling", () => {
-  test("It should display the correct result when success", async () => {
+  test("It shouldln't call the submit handler when incorrect inputs", async () => {
     // Create a mock submit handler
     const mockClickHanlder = jest.fn()
     // Pass this function has a Form prop
