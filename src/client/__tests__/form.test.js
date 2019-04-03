@@ -76,7 +76,7 @@ describe("Submit handler success handling", () => {
   test("It should call the submit hanlder once when correct inputs", async () => {
     // Create a mock submit handler
     const mockClickHanlder = jest.fn()
-    // Pass this function has a Form prop
+    // Pass this function as a Form prop
     const form = render(<Form fetchEnergyEstimation={mockClickHanlder} />)
     const latitudeInput = form.getByTestId("latitude-input")
     const longitudeInput = form.getByTestId("longitude-input")
